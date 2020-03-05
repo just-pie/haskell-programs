@@ -20,10 +20,15 @@ mocninaLogGE a n | n == 0 = 1
                  | n `mod` 2 == 1 = a * mocninaLogGE a (n-1)
                  | otherwise = mocninaLogGE (a*a) (div n 2)
 
+urocenaSuma suma urok roky | roky == 0 = suma
+                           | urok == 0 = suma
+                           | suma == 0 = 0
+                           | otherwise = urocenaSuma (suma+((suma/100)*urok)) urok (roky-1)
+
 main = do
+  print(urocenaSuma 100 10 10)
   -- return
   {-
   comment
   -}
-
-  print(mocninaLogGE 2 3)
+  
