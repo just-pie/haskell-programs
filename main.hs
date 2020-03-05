@@ -18,7 +18,7 @@ mocninaGE a n | n == 0 = 1
 
 mocninaLogGE a n | n == 0 = 1
                  | n `mod` 2 == 1 = a * mocninaLogGE a (n-1)
-                 | otherwise = a * mocninaLogGE a (n `div` 2)
+                 | otherwise = mocninaLogGE (a*a) (div n 2)
 
 main = do
   -- return
@@ -26,4 +26,4 @@ main = do
   comment
   -}
 
-  print(mocninaLogGE 5 3)
+  print(mocninaLogGE 2 3)
