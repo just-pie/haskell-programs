@@ -16,10 +16,14 @@ mocninaGE a n | n == 0 = 1
               | n < 0 = a * mocninaGE a (absolutnaGE n)
               | otherwise = a * mocninaGE a (n-1)
 
+mocninaLogGE a n | n == 0 = 1
+                 | n `mod` 2 == 1 = a * mocninaLogGE a (n-1)
+                 | otherwise = a * mocninaLogGE a (n `mod` 2)
+
 main = do
   -- return
   {-
   comment
   -}
 
-  print(mocninaGE 5 2)
+  print(mocninaLogGE 5 3)
