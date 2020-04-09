@@ -14,6 +14,13 @@ mucha c = if any (==c) ['a','e','i','o','u','y']
           then map (\x -> if any (==x) ['a','e','i','o','u','y'] 
                           then c else x) "Sedi mucha na stene"
           else error "Zadany znak nie je samohlaska"
+{- Alebo aj takto sa to da
+mucha c = if elem c "aeiouy"
+          then map (\x -> if any (==x) ['a','e','i','o','u','y'] 
+                          then c else x) "Sedi mucha na stene"
+          else error "Zadany znak nie je samohlaska"
+-}
+
 
 main = do
   print(tupleList[1,3,2,-1,7,0])
