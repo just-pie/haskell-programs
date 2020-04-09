@@ -45,6 +45,12 @@ minSort [x] = [x]
 minSort xs = m : (minSort (bezPrvku  m xs))
   where m = mini xs
 
+-- ako funguje minSort
+-- [2,1,3]
+-- 1:[2,3]
+-- 1:(2:[3])
+-- ...
+
 main = do
   print("Haskell")
   print(minSort[1,3,-1,7,0])
