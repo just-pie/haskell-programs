@@ -5,7 +5,7 @@ A little course of Haskell programs.
 
 ## Contents
 
-- 📁 [`cvicenie1`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie1) - definovanie_funkcii.hs
-- 📁 [`cvicenie2`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie2) - distancne_zadanie.hs and distancne_zadanie_precvicovanie.hs
-- 📁 [`cvicenie3`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie3) - funkcie_vyssieho_radu.hs
+- 📁 [`cvicenie1`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie1) - *definovanie_funkcii.hs*
+- 📁 [`cvicenie2`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie2) - *distancne_zadanie.hs* and *distancne_zadanie_precvicovanie.hs*
+- 📁 [`cvicenie3`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie3) - *funkcie_vyssieho_radu.hs*
 - 📁 `cvicenie4` - Soon...
