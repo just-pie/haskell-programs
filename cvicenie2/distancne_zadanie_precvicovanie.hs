@@ -31,5 +31,20 @@ list_to_set (x:xs) | prvok x xs = list_to_set(xs)
 listtoset [] = []
 listtoset (x:xs) = x:listtoset (filter ((/=) x) xs)
 
+-- 10. minSort
+mini [x] = x
+mini (x:y:ys) | x <= y = mini (x:ys)
+              | otherwise = mini (y:ys)
+
+bezPrvku _ [] = [] -- _ je akykolvek prvok
+bezPrvku x (y:ys) | x == y = (ys)
+                  | otherwise = y : (bezPrvku x ys)
+
+minSort [] = []
+minSort [x] = [x]
+minSort xs = m : (minSort (bezPrvku  m xs))
+  where m = mini xs
+
 main = do
   print("Haskell")
+  print(minSort[1,3,-1,7,0])
