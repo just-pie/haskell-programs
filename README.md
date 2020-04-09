@@ -5,7 +5,7 @@ A little course of Haskell programs.
 
 ## Contents
 
-📁 `cvicenie1` - definovanie_funkcii.hs
-📁 `cvicenie2` - distancne_zadanie.hs and distancne_zadanie_precvicovanie.hs
-📁 `cvicenie3` - funkcie_vyssieho_radu.hs
-📁 `cvicenie4` - Soon...
+- 📁 `cvicenie1` - definovanie_funkcii.hs
+- 📁 `cvicenie2` - distancne_zadanie.hs and distancne_zadanie_precvicovanie.hs
+- 📁 `cvicenie3` - funkcie_vyssieho_radu.hs
+- 📁 `cvicenie4` - Soon...
