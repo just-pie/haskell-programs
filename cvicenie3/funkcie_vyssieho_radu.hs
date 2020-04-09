@@ -21,7 +21,13 @@ mucha c = if elem c "aeiouy"
           else error "Zadany znak nie je samohlaska"
 -}
 
+-- 3. mini :: Ord a => [a] -> a
+-- Nájde minimum v zadanom zozname prvkov.
+-- acc = akumulator na docasny vysledok
+--je dany prvok mensi ako docasny vysledok?
+miniFL (x:xs) = foldl (\acc x -> if x < acc then x else acc ) x xs
 
 main = do
   print(tupleList[1,3,2,-1,7,0])
   print(tupleListMap[1,3,2,-1,7,0])
+  print(miniFL [1,2,3,6,-5])
