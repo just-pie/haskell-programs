@@ -43,7 +43,8 @@ miniSCR (x:xs) = scanr (\x acc -> if x < acc then x else acc) x xs
 prvok _ [] = False
 prvok x (y:ys) | x == y = True
                | otherwise = prvok x(ys)
-
+               
+prvokFL a xs = foldr (\acc x -> if x == a then True else acc) False xs
 prvokFR a xs = foldr (\x acc -> if x == a then True else acc) False xs
 
 main = do
@@ -54,4 +55,5 @@ main = do
   print(miniFR([1,2,3,6,-5]))
   print(miniSCR([1,2,3,6,-5]))
   print(prvok 5 [1,54,8,45,6])
+  print(prvokFR 5 [1,54,8,5,6])
   print(prvokFR 5 [1,54,8,45,6])
