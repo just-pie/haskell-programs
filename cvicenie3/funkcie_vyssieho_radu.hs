@@ -6,7 +6,7 @@ tupleList (x:xs) | even x == True = (x, True):(tupleList xs)
 -- tupleList(x:xs) = (x, even x):(tupleList xs) -- Da sa aj takto jednoducho
 tupleListMap xs = map (\x -> (x, even x)) xs
 
--- ===================================================================
+-- ======================================================================================
 -- 2. Mucha
 -- mucha :: Char -> String
 -- mucha c = map (\x -> if any (==x) ['a','e','i','o','u','y'] then c else x) "Sedi mucha na stene"
@@ -21,7 +21,7 @@ mucha c = if elem c "aeiouy"
                           then c else x) "Sedi mucha na stene"
           else error "Zadany znak nie je samohlaska"
 -}
--- ===================================================================
+-- ======================================================================================
 -- 3. mini :: Ord a => [a] -> a
 -- Nájde minimum v zadanom zozname prvkov.
 -- acc = akumulator na docasny vysledok
@@ -38,7 +38,7 @@ miniFR (x:xs) = foldr (\x acc -> if x < acc then x else acc) x xs
 -- scanr pre vypis sprava
 miniSCR (x:xs) = scanr (\x acc -> if x < acc then x else acc) x xs
 
--- ===================================================================
+-- ======================================================================================
 -- 4. Funkcia prvok :: Eq a => a -> [a] -> Bool zistí, či sa daný prvok nachádza v zozname.
 prvok _ [] = False
 prvok x (y:ys) | x == y = True
@@ -48,6 +48,15 @@ prvokFL a xs = foldr (\acc x -> if x == a then True else acc) False xs
 prvokFR a xs = foldr (\x acc -> if x == a then True else acc) False xs
 -- cez filter Any
 prvokAny a xs = any (==a) xs
+
+-- =======================================================================================
+-- 5. Funkcia doubleList :: Eq a => [a] -> [a] zdvojnásobí výskyt každého prvku v zozname.
+doubleListFR xs = foldr (\x acc -> x:x:acc) [] xs
+-- pri foldingu nalavo musime zretazit zoznam so zoznamoma tak pridam x na koniec zoznamu
+doubleListFL xs = foldl(\acc x -> acc ++ [x,x]) [] xs
+doubleListSCR xs = scanr (\x acc -> x:x:acc) [] xs
+doubleListSCL xs = scanl(\acc x -> acc ++ [x,x]) [] xs
+
 
 main = do
   print(tupleList[1,3,2,-1,7,0])
@@ -59,3 +68,4 @@ main = do
   print(prvok 5 [1,54,8,45,6])
   print(prvokFR 5 [1,54,8,5,6])
   print(prvokFR 5 [1,54,8,45,6])
+  print(doubleList [1,54,8,5,6])
