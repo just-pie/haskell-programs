@@ -1,4 +1,4 @@
-# Haskell programs
+# λ Haskell programs
 A little course of Haskell programs.
 
 > This *github* repository is a gradual learning course of the subject **Functional Programming** and it contains assignments of this subjects in ***Haskell*** programming language.
