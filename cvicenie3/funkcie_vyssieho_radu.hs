@@ -41,3 +41,6 @@ main = do
   print(tupleList[1,3,2,-1,7,0])
   print(tupleListMap[1,3,2,-1,7,0])
   print(miniFL [1,2,3,6,-5])
+  print(miniSCL([1,2,3,6,-5]))
+  print(miniFR([1,2,3,6,-5]))
+  print(miniSCR([1,2,3,6,-5]))
