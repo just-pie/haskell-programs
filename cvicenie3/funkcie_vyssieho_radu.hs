@@ -1,4 +1,5 @@
 -- 1. tupleList
+-- Vytvorí zo zoznamu celých čísiel zoznam dvojíc (číslo, parita čísla).
 -- tupleList :: Integral a => [a] -> [(a,Bool)]
 tupleList [] = []
 tupleList (x:xs) | even x == True = (x, True):(tupleList xs)
@@ -8,7 +9,7 @@ tupleListMap xs = map (\x -> (x, even x)) xs
 
 -- ======================================================================================
 -- 2. Mucha
--- mucha :: Char -> String
+-- Funkcia mucha :: Char -> String vo vete "Sedi mucha na stene" nahradí všetky samohlásky zadanou samohláskou.
 -- mucha c = map (\x -> if any (==x) ['a','e','i','o','u','y'] then c else x) "Sedi mucha na stene"
 -- Tu zistujem, ci je na vstupe samohlaska a ak nie, tak vypise error 
 mucha c = if any (==c) ['a','e','i','o','u','y']
@@ -21,6 +22,7 @@ mucha c = if elem c "aeiouy"
                           then c else x) "Sedi mucha na stene"
           else error "Zadany znak nie je samohlaska"
 -}
+
 -- ======================================================================================
 -- 3. mini :: Ord a => [a] -> a
 -- Nájde minimum v zadanom zozname prvkov.
@@ -46,16 +48,23 @@ prvok x (y:ys) | x == y = True
                
 prvokFL a xs = foldr (\acc x -> if x == a then True else acc) False xs
 prvokFR a xs = foldr (\x acc -> if x == a then True else acc) False xs
--- cez filter Any
+-- cez filter Any - vracia vzdy True alebo False, nevytvara zoznamy!!!
 prvokAny a xs = any (==a) xs
 
 -- =======================================================================================
 -- 5. Funkcia doubleList :: Eq a => [a] -> [a] zdvojnásobí výskyt každého prvku v zozname.
 doubleListFR xs = foldr (\x acc -> x:x:acc) [] xs
--- pri foldingu nalavo musime zretazit zoznam so zoznamoma tak pridam x na koniec zoznamu
+-- pri foldingu nalavo musime zretazit zoznam so zoznamom a tak pridam x na koniec zoznamu
 doubleListFL xs = foldl(\acc x -> acc ++ [x,x]) [] xs
+-- variacia pre scanr a scanl
 doubleListSCR xs = scanr (\x acc -> x:x:acc) [] xs
 doubleListSCL xs = scanl(\acc x -> acc ++ [x,x]) [] xs
+
+-- =======================================================================================
+-- 6. Funkcia zaporne :: (Num a, Ord a) => [a] -> [a] vráti podzoznam obsahujúci záporné čísla z daného zoznamu čísiel.
+zaporne xs = foldr (\x acc -> if x < 0 then x:acc else acc) [] xs
+zaporne2 xs = filter (<0) xs -- to iste, len cez filter
+
 
 
 main = do
@@ -69,3 +78,5 @@ main = do
   print(prvokFR 5 [1,54,8,5,6])
   print(prvokFR 5 [1,54,8,45,6])
   print(doubleList [1,54,8,5,6])
+  print(zaporne [1,2,3,-4,-5])
+  print(zaporne2 [1,2,3,-4,-5])
