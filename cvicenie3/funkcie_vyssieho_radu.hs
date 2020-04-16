@@ -46,6 +46,8 @@ prvok x (y:ys) | x == y = True
                
 prvokFL a xs = foldr (\acc x -> if x == a then True else acc) False xs
 prvokFR a xs = foldr (\x acc -> if x == a then True else acc) False xs
+-- cez filter Any
+prvokAny a xs = any (==a) xs
 
 main = do
   print(tupleList[1,3,2,-1,7,0])
