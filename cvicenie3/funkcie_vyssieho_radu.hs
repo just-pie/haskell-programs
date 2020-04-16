@@ -28,11 +28,14 @@ mucha c = if elem c "aeiouy"
 miniFL (x:xs) = foldl (\acc x -> if x < acc then x else acc ) x xs
 
 -- scanl aj vypise
-miniSC (x:xs) = scanl (\acc x -> if x < acc then x else acc) x xs
+miniSCL (x:xs) = scanl (\acc x -> if x < acc then x else acc) x xs
 
 -- pre folding sprava
 -- akumulator je napravo
 miniFR (x:xs) = foldr (\x acc -> if x < acc then x else acc) x xs
+
+-- scanr pre vypis sprava
+miniSCR (x:xs) = scanr (\x acc -> if x < acc then x else acc) x xs
 
 main = do
   print(tupleList[1,3,2,-1,7,0])
