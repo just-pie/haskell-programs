@@ -85,6 +85,7 @@ pocetZap2 xs = length(filter (<0) xs)
 -- binToDec :: Num a => [Char] -> a 
 -- Prevedie binárne číslo zadané ako String na desiatkové číslo.
 binToDecFL xs = foldl (\acc x -> if x=='0' then acc*2 else acc*2+1) 0 xs
+-- pre scanl
 binToDecSCL xs = scanl (\acc x -> if x=='0' then acc*2 else acc*2+1) 0 xs
 
 main = do
