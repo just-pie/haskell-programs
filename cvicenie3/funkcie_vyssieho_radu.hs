@@ -27,6 +27,13 @@ mucha c = if elem c "aeiouy"
 --je dany prvok mensi ako docasny vysledok?
 miniFL (x:xs) = foldl (\acc x -> if x < acc then x else acc ) x xs
 
+-- scanl aj vypise
+miniSC (x:xs) = scanl (\acc x -> if x < acc then x else acc) x xs
+
+-- pre folding sprava
+-- akumulator je napravo
+miniFR (x:xs) = foldr (\x acc -> if x < acc then x else acc) x xs
+
 main = do
   print(tupleList[1,3,2,-1,7,0])
   print(tupleListMap[1,3,2,-1,7,0])
