@@ -1,6 +1,8 @@
 # λ Haskell programs
 A little course of Haskell programs.
 
+> **Note**: This repository contains tasks in slovak language.
+
 > This *github* repository is a gradual learning course of the subject **Functional Programming** and it contains assignments of this subjects in ***Haskell*** programming language.
 
 ## Contents
