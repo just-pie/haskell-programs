@@ -118,11 +118,16 @@ hextodec xs = foldl(\acc x -> if ord x <= 57 then acc*16 + (ord x - 48) else acc
 -- Vytvorí zo zadaného zoznamu dvojíc (počet opakovaní, prvok) zoznam prvkov s daným počtom opakovaní.
 -- Napríklad:
 -- unpackList [(4,0),(2,1),(3,0)] = [0,0,0,0,1,1,0,0,0]
-unpackList xs = foldl (\acc x -> acc ++ unpackTuple x ) [] xs
+
+-- folding left
+unpackListL xs = foldl (\acc x -> acc ++ unpackTuple x ) [] xs
   where unpackTuple (p@pocetOpakovani,c) | p <= 0 = []
                                          | otherwise  = unpackTuple (p-1, c) ++ [c]
 
-
+-- foldind right
+unpackListR xs = foldr (\x acc ->  unpackTuple x : acc) [] xs
+  where unpackTuple (p@pocetOpakovani,c) | p <= 0 = []
+                                         | otherwise  = unpackTuple (p-1, c) ++ [c]
 
 main = do
   print(tupleList[1,3,2,-1,7,0])        -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
