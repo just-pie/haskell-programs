@@ -125,26 +125,28 @@ unpackListL xs = foldl (\acc x -> acc ++ unpackTuple x ) [] xs
                                          | otherwise  = unpackTuple (p-1, c) ++ [c]
 
 -- foldind right
+-- ( . ) Y ( . )
 unpackListR xs = foldr (\x acc ->  (unpackTuple x) ++ acc) [] xs
   where unpackTuple (p@pocetOpakovani,c) | p <= 0 = []
                                          | otherwise  = unpackTuple (p-1, c) ++ [c]
 
 main = do
-  print(tupleList[1,3,2,-1,7,0])        -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
-  print(tupleListMap[1,3,2,-1,7,0])     -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)][(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
-  print(miniFL [1,2,3,6,-5])            -- -5 
-  print(miniSCL([1,2,3,6,-5]))          -- [1,1,1,1,-5]
-  print(miniFR([1,2,3,6,-5]))           -- -5 
-  print(miniSCR([1,2,3,6,-5]))          -- [-5,-5,-5,-5,1]
-  print(prvok 5 [1,54,8,45,6])          -- False
-  print(prvokFR 5 [1,54,8,5,6])         -- True
-  print(prvokFR 5 [1,54,8,45,6])        -- False
-  print(doubleList [1,54,8,5,6])        -- [1,1,54,54,8,8,5,5,6,6]
-  print(zaporne [1,2,3,-4,-5])          -- [-4,-5]
-  print(zaporne2 [1,2,3,-4,-5])         -- [-4,-5]
-  print(pocetZap [1,2,3,-4,-5])         -- 2
-  print(binToDecFL "10")                -- 2
-  print(binToDecSCL "10")               -- [0,1,2]
-  print(hexToDec("1A"))                 -- 26
-  print(hextodec("1A"))                 -- 26
-  print(unpackList[(4,0),(2,1),(5,8)])  -- [0,0,0,0,1,1,8,8,8,8,8]
+  print(tupleList[1,3,2,-1,7,0])                        -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
+  print(tupleListMap[1,3,2,-1,7,0])                     -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)][(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
+  print(miniFL [1,2,3,6,-5])                            -- -5 
+  print(miniSCL([1,2,3,6,-5]))                          -- [1,1,1,1,-5]
+  print(miniFR([1,2,3,6,-5]))                           -- -5 
+  print(miniSCR([1,2,3,6,-5]))                          -- [-5,-5,-5,-5,1]
+  print(prvok 5 [1,54,8,45,6])                          -- False
+  print(prvokFR 5 [1,54,8,5,6])                         -- True
+  print(prvokFR 5 [1,54,8,45,6])                        -- False
+  print(doubleList [1,54,8,5,6])                        -- [1,1,54,54,8,8,5,5,6,6]
+  print(zaporne [1,2,3,-4,-5])                          -- [-4,-5]
+  print(zaporne2 [1,2,3,-4,-5])                         -- [-4,-5]
+  print(pocetZap [1,2,3,-4,-5])                         -- 2
+  print(binToDecFL "10")                                -- 2
+  print(binToDecSCL "10")                               -- [0,1,2]
+  print(hexToDec("1A"))                                 -- 26
+  print(hextodec("1A"))                                 -- 26
+  print(unpackListL[(4,0),(2,1),(5,8)])                 -- [0,0,0,0,1,1,8,8,8,8,8]
+  print(unpackList[(1,'b'),(2,'o'),(1,'b'),(1,'s')])    -- "boobs"
