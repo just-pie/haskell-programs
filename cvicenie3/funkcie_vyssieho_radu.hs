@@ -27,7 +27,7 @@ mucha c = if elem c "aeiouy"
 -- 3. mini :: Ord a => [a] -> a
 -- Nájde minimum v zadanom zozname prvkov.
 -- acc = akumulator na docasny vysledok
---je dany prvok mensi ako docasny vysledok?
+-- je dany prvok mensi ako docasny vysledok?
 miniFL (x:xs) = foldl (\acc x -> if x < acc then x else acc ) x xs
 
 -- scanl aj vypise
