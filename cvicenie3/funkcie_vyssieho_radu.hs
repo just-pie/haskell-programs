@@ -88,6 +88,29 @@ binToDecFL xs = foldl (\acc x -> if x=='0' then acc*2 else acc*2+1) 0 xs
 -- pre scanl
 binToDecSCL xs = scanl (\acc x -> if x=='0' then acc*2 else acc*2+1) 0 xs
 
+-- =======================================================================================
+-- 9. Funkcia hexToDec
+-- hexToDec:: Num a => [Char] -> a 
+-- Prevedie hexadecimálne číslo zadané ako String na desiatkové číslo.
+hexToDec xs = foldl (\acc x -> acc*16 + digitToInt x ) 0 xs
+  where digitToInt d | d == '0' = 0
+                     | d == '1' = 1
+                     | d == '2' = 2
+                     | d == '3' = 3
+                     | d == '4' = 4
+                     | d == '5' = 5
+                     | d == '6' = 6
+                     | d == '7' = 7
+                     | d == '8' = 8
+                     | d == '9' = 9
+                     | d == 'A' = 10
+                     | d == 'B' = 11
+                     | d == 'C' = 12
+                     | d == 'D' = 13
+                     | d == 'E' = 14
+                     | d == 'F' = 15
+
+
 main = do
   print(tupleList[1,3,2,-1,7,0])        -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
   print(tupleListMap[1,3,2,-1,7,0])     -- [(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)][(1,False),(3,False),(2,True),(-1,False),(7,False),(0,True)]
@@ -104,3 +127,4 @@ main = do
   print(pocetZap [1,2,3,-4,-5])         -- 2
   print(binToDecFL "10")                -- 2
   print(binToDecSCL "10")               -- [0,1,2]
+  print(hexToDec("1A"))                 -- 26
