@@ -125,7 +125,7 @@ unpackListL xs = foldl (\acc x -> acc ++ unpackTuple x ) [] xs
                                          | otherwise  = unpackTuple (p-1, c) ++ [c]
 
 -- foldind right
-unpackListR xs = foldr (\x acc ->  unpackTuple x : acc) [] xs
+unpackListR xs = foldr (\x acc ->  (unpackTuple x) ++ acc) [] xs
   where unpackTuple (p@pocetOpakovani,c) | p <= 0 = []
                                          | otherwise  = unpackTuple (p-1, c) ++ [c]
 
