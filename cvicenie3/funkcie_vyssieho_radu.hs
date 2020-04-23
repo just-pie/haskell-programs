@@ -114,11 +114,13 @@ hextodec xs = foldl(\acc x -> if ord x <= 57 then acc*16 + (ord x - 48) else acc
 
 -- =======================================================================================
 -- 10. Funkcia unpackList 
--- inpackList :: Num a => [(a,b)] -> [b] 
+-- unpackList :: Num a => [(a,b)] -> [b] 
 -- Vytvorí zo zadaného zoznamu dvojíc (počet opakovaní, prvok) zoznam prvkov s daným počtom opakovaní.
 -- Napríklad:
 -- unpackList [(4,0),(2,1),(3,0)] = [0,0,0,0,1,1,0,0,0]
-
+unpackList xs = foldl (\acc x -> acc ++ unpackTuple x ) [] xs
+  where unpackTuple (p@pocetOpakovani,c) | p <= 0 = []
+                                         | otherwise  = unpackTuple (p-1, c) ++ [c]
 
 
 
@@ -140,3 +142,4 @@ main = do
   print(binToDecSCL "10")               -- [0,1,2]
   print(hexToDec("1A"))                 -- 26
   print(hextodec("1A"))                 -- 26
+  print(unpackList[(4,0),(2,1),(5,8)])  -- [0,0,0,0,1,1,8,8,8,8,8]
