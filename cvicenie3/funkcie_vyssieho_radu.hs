@@ -149,4 +149,4 @@ main = do
   print(hexToDec("1A"))                                 -- 26
   print(hextodec("1A"))                                 -- 26
   print(unpackListL[(4,0),(2,1),(5,8)])                 -- [0,0,0,0,1,1,8,8,8,8,8]
-  print(unpackList[(1,'b'),(2,'o'),(1,'b'),(1,'s')])    -- "boobs"
+  print(unpackListR[(1,'b'),(2,'o'),(1,'b'),(1,'s')])    -- "boobs"
