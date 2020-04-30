@@ -48,3 +48,5 @@ main = do
   print(head (filterl (>5) [1..]))  -- 6
   print(revr [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
   print(revl [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
+  print(sucet [1,2,3])              -- 6
+  print(sumTR [1..3] 0)             -- 6 (Tail recursion)
