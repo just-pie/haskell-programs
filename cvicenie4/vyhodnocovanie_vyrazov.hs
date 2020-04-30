@@ -35,7 +35,9 @@ sucet [1,2,3] =
 -}
 
 -- Using Tail recursion
-
+-- sumTR [1,2,3] 0
+sumTR [] acc = acc
+sumTR (x:xs) acc = sumTR xs x+acc
 
 main = do
   print(mapr (+1) [1,2,3])          -- [2,3,4]
