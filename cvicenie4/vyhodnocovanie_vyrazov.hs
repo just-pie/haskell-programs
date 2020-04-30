@@ -16,6 +16,25 @@ filterl f xs = foldl (\acc x -> if f x then acc ++ [x] else acc) [] xs
 revr xs = foldr (\ x acc -> acc ++ [x]) [] xs
 revl xs = foldl (\ acc x -> [x] ++ acc) [] xs
 
+------------------------------------------------------------------
+-- 4. Naprogramujte funkciu sucet :: Num a => [a] -> a na výpočet súčtu prvkov v zozname pomocou rekurzie a pattern matchingu. Upravte ju na funkciu s chvostovou rekurziou.
+sucet [] = 0
+sucet [x] = x
+sucet (x:xs) = x + sucet(xs)
+
+-- How does recursion works?
+{-
+sucet [1,2,3] = 
+1+ sucet [2,3] =
+1 + (2 + sucet [3]) =
+1 + (2 + (3 + sucet[])) = 
+1 + (2 + (3 + 0)) =
+1 + (2 + 3) =
+1 + 5 =
+6
+-}
+
+-- Using Tail recursion
 
 
 main = do
@@ -28,4 +47,4 @@ main = do
   print(head (filterr (>5) [1..]))  -- 6
   print(head (filterl (>5) [1..]))  -- 6
   print(revr [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
-  print(revr [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
+  print(revl [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
