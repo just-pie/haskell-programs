@@ -14,7 +14,7 @@ filterl f xs = foldl (\acc x -> if f x then acc ++ [x] else acc) [] xs
 ------------------------------------------------------------------
 -- 3. Naprogramujte funkciu reverse pomocou funkcií foldr a foldl. Funkcie nazvite napr. revr, revl.
 revr xs = foldr (\ x acc -> acc ++ [x]) [] xs
-
+revl xs = foldl (\ acc x -> [x] ++ acc) [] xs
 
 
 
@@ -27,4 +27,5 @@ main = do
   print(filterl (>5) [1..10])       -- [6,7,8,9,10]
   print(head (filterr (>5) [1..]))  -- 6
   print(head (filterl (>5) [1..]))  -- 6
+  print(revr [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
   print(revr [1..10])               -- [10,9,8,7,6,5,4,3,2,1]
