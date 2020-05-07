@@ -73,7 +73,13 @@ pocetTR [1,2,3] 0 = pocetTR [2,3] 1 =
 
 sucpos [] (accS, accP) = (accS, accP)
 sucpos (x:xs) (accS, accP) = sucpos xs (accS+x, accP+1)
-sucpoc2 xs = sucpos xs (0,0) -- toto nam zjednodusuje print
+sucpoc2 xs = sucpos xs (0,0) -- toto nam zjednodusuje print, nemusim pisat este dve nuly do printu
+
+------------------------------------------------------------------
+-- 7. Pomocou funkcie sucpoc vypočítajte aritmetický priemer prvkov zoznamu.
+aritPriemer[] = 0
+aritPriemer (x:xs) = fst (sucpoc2 xs) / snd (sucpoc2 xs)
+
 
 main = do
   print(mapr (+1) [1,2,3])          -- [2,3,4]
@@ -91,3 +97,6 @@ main = do
   print(pocet [1..10])              -- 10
   print(pocetTR [1..10] 0)          -- 10 (Tail recursion)
   print(sucpoc2 [1..10])            -- (55,10)
+  print(aritPriemer [1..10])        -- 6.0
+  
+  
