@@ -115,4 +115,4 @@ main = do
   print(sucpoc2 [1..10])            -- (55,10)
   print(aritPriemer [1..10])        -- 6.0
   print(factorialTR 5 1)            -- 120
-  print(fibTR2 7)                   -- 7
+  print(fibTR2 7)                   -- 13
