@@ -81,6 +81,16 @@ aritPriemer[] = 0
 aritPriemer (x:xs) = fst (sucpoc2 xs) / snd (sucpoc2 xs)
 
 
+------------------------------------------------------------------
+-- 8. Napíšte funkciu s chvostovou rekurziou na výpočet faktoriálu.
+
+faktorial 0 = 1
+faktorial x = x * faktorial (x-1) 
+
+factorialTR 0 acc = acc
+factorialTR x acc = factorialTR (x−1) (x*acc)
+
+
 main = do
   print(mapr (+1) [1,2,3])          -- [2,3,4]
   print(mapl (+1) [1,2,3])          -- [2,3,4]
@@ -98,5 +108,5 @@ main = do
   print(pocetTR [1..10] 0)          -- 10 (Tail recursion)
   print(sucpoc2 [1..10])            -- (55,10)
   print(aritPriemer [1..10])        -- 6.0
-  
+  print(factorialTR 5 1)            -- 120
   
