@@ -90,6 +90,12 @@ faktorial x = x * faktorial (x-1)
 factorialTR 0 acc = acc
 factorialTR x acc = factorialTR (x−1) (x*acc)
 
+------------------------------------------------------------------
+-- 9. Napíšte funkciu s chvostovou rekurziou na výpočet Fibonacciho čísla.
+fibTR 0 acc1 _ = acc1 -- nezaujima nas acc2 takm pouzijeme _ - wilcart
+fibTR 1 _ acc2 = acc2
+fibTR x acc1 acc2 = fibTR (x-1) acc2 (acc1+acc2)
+fibTR2 x = fibTR x 0 1
 
 main = do
   print(mapr (+1) [1,2,3])          -- [2,3,4]
@@ -109,4 +115,4 @@ main = do
   print(sucpoc2 [1..10])            -- (55,10)
   print(aritPriemer [1..10])        -- 6.0
   print(factorialTR 5 1)            -- 120
-  
+  print(fibTR2 7)                   -- 7
