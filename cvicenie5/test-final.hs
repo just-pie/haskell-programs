@@ -28,8 +28,8 @@ urocenaSuma suma urok roky | roky == 0 = suma
                            | otherwise = urocenaSuma (suma+((suma/100)*urok)) urok (roky-1)
 
 ---------------------------------------------------------------------------------------
-
--- distancne_zadanie.hs a distancne_zadanie_precvicovanie.hs
+------------    distancne_zadanie.hs a distancne_zadanie_precvicovanie.hs    ----------
+---------------------------------------------------------------------------------------
 -- 1. Napíšte funkciu, ktorá porovná dva časy zadané ako trojice hodina, minúta, sekunda a zistí, či prvý čas je skôr ako druhý.
 skor (h1,m1,s1) (h2,m2,s2) | h1 < h2 = True
                            | h1 > h2 = False
@@ -43,6 +43,9 @@ prevod_hodin (h,m,s) | h > 12 = (h-12,m,s," PM")
                      | h == 0 = (h+12,m,s," AM")
                      | h == 12 = (h,m,s," PM")
                      | otherwise = (h,m,s,"AM")
+
+-- 4. Definujte funkciu na výpočet vzdialenosti dvoch bodov v rovine.
+vzdialenost a1 a2 b1 b2 = absolutna (sqrt (b1-a1)^2 + (b2-a2)^2)
 
 ---------------------------------------------------------------------------------------
 
