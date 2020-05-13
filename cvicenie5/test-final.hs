@@ -1,5 +1,21 @@
--- cvicenie1.hs
+{--
+Štandardné funkcie na prácu so zoznamami:
+dlzka :: [a] -> Int length
+prvy :: [a] -> a head
+bezpr :: [a] -> [a] tail
+posl :: [a] -> a last
+bezposl :: [a] -> [a] init
+prvych :: Int -> [a] -> [a] take
+bezprvych :: Int -> [a] -> [a] drop
+prvok :: a -> [a] -> Bool elem
+sucet :: Num a => [a] -> a sum
+obrat :: [a] -> [a] reverse
+maxi :: Ord a => [a] -> a maximum
+--}
 
+--------------------------------------------------------------------------
+--------------------------     cvicenie1.hs    ---------------------------
+--------------------------------------------------------------------------
 absolutna x = if x < 0 then x*(-1) else x
 
 absolutnaGE x | x < 0 = x*(-1)
@@ -44,7 +60,12 @@ prevod_hodin (h,m,s) | h > 12 = (h-12,m,s," PM")
                      | h == 12 = (h,m,s," PM")
                      | otherwise = (h,m,s,"AM")
 
+-- 3. Funkcia velV :: Floating a => (a,a) -> a na výpočet veľkosti rovinného vektora.
+velV  :: Floating a => (a,a) -> a 
+velV (a1,a2) = sqrt (a1^2 + a2^2) 
+
 -- 4. Definujte funkciu na výpočet vzdialenosti dvoch bodov v rovine.
+vzdialenost :: Floating a => (a,a) -> (a,a) -> a
 vzdialenost a1 a2 b1 b2 = absolutna (sqrt (b1-a1)^2 + (b2-a2)^2)
 
 ---------------------------------------------------------------------------------------
@@ -425,3 +446,7 @@ vypis_neparne xs = [ x | x <- xs, odd x ]
 
 -- Eulerova funkcia - pocet nesudelitelnych cisel
 eulerFunkcia n = length [x | x <- [1..n], gcd n x == 1]
+
+-- Ci su dve cisla delitelne
+divisible x y | x/y == 0 = True
+              | otherwise = False
