@@ -402,7 +402,24 @@ sito (p:xs) = p:sito [n | n <- xs, mod n p /= 0]
 sito _ = []
 
 
+-----------------------------------------------------------------------------
+-------------------------      Ulohy na precvicenie      --------------------
 
+-- 3. Funkcia nsd :: (Ord a, Num a) => a -> a -> a, ktorá vráti najväčší spoločný deliteľ dvoch zadaných čísiel.
+-- nsd 34 18 = 2
+nsd a b = gcd a b   
+
+-- 4. Funkcia sudelitelne :: (Ord a, Num a) => a -> a -> Bool, ktorá zistí, či zadané dve čísla sú súdeliteľné, t.j. či majú spoločného deliteľa rôzneho od 1.
+-- sudelitelne 34 18 = True
+sudelitelne a b | nsd a b <= 1 = False
+                | otherwise = True
+
+group :: (Eq a) => [a] ->  [[a]]
+group [] = []
+group (x:xs) = first : group second
+  where y = span (== x) $ x:xs
+        first = fst $ y
+        second = snd $ y
 
 
 -----------------------------------------------------------------------------
@@ -422,6 +439,10 @@ reverse (x:xs) = rev xs ++[x]
 vymaz_duplikat :: Eq a => [a] -> [a]
 vymaz_duplikat []     = []
 vymaz_duplikat (x:xs) = x : filter (/= x) (vymaz_duplikat xs)
+
+-- alebo -> efektivnejsie
+compress :: Eq a => [a] -> [a]
+compress = map head . group   
 
 -- vypise permutacie False a True v zozname
 -- Priklad: print(bools 2)  -> [[False,False],[False,True],[True,False],[True,True]]
@@ -450,3 +471,32 @@ eulerFunkcia n = length [x | x <- [1..n], gcd n x == 1]
 -- Ci su dve cisla delitelne
 divisible x y | x/y == 0 = True
               | otherwise = False
+              
+-- Zisti, ci ej zadane cislo Palindrom
+isPalindromeHelper :: [Integer] -> [Integer] -> Bool
+isPalindromeHelper (x:xs) (y:ys)
+  | x == y && xs == [] && ys == [] = True
+  | x == y    = isPalindromeHelper xs ys
+  | x /= y    = False
+  | otherwise = False
+
+isPalindrome :: [Integer] -> Bool
+isPalindrome ls = isPalindromeHelper ls reversed
+  where reversed = reverse ls
+  
+-- Najde i-ty element listu
+nthElement :: Int -> [Int] -> Int
+nthElement x xs
+  | x > (length xs) = 0
+  | x == 0          = head xs
+  | otherwise       = nthElement (x - 1) (tail xs)
+  
+ -- vrati prvy prvok zo zoznamu
+prvy :: [Integer] -> Integer
+prvy (x : []) = x
+prvy (x : xs) = x
+
+-- vrati posledny prvok zo zoznamu
+posledny :: [Integer] -> Integer
+posledny (x : []) = x
+posledny (x : xs) = lastElem xs
