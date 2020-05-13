@@ -130,3 +130,8 @@ spoj xs ys =concat[xs,ys]
 reverse :: Ord a => [a]->[a]
 reverse [] = []
 reverse (x:xs) = rev xs ++[x]
+
+-- vymaze opakujuce sa prvky zoznamu, duplikaty
+vymaz_duplikat :: Eq a => [a] -> [a]
+vymaz_duplikat []     = []
+vymaz_duplikat (x:xs) = x : filter (/= x) (vymaz_duplikat xs)
