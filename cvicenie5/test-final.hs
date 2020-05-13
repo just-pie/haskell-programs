@@ -27,10 +27,10 @@ urocenaSuma suma urok roky | roky == 0 = suma
                            | suma == 0 = 0
                            | otherwise = urocenaSuma (suma+((suma/100)*urok)) urok (roky-1)
 
-
+---------------------------------------------------------------------------------------
 
 -- distancne_zadanie.hs a distancne_zadanie_precvicovanie.hs
--- 1. porovnanie casov
+-- 1. Napíšte funkciu, ktorá porovná dva časy zadané ako trojice hodina, minúta, sekunda a zistí, či prvý čas je skôr ako druhý.
 skor (h1,m1,s1) (h2,m2,s2) | h1 < h2 = True
                            | h1 > h2 = False
                            | m1 < m2 = True
@@ -38,11 +38,13 @@ skor (h1,m1,s1) (h2,m2,s2) | h1 < h2 = True
                            | s1 < s2 = True
                            | s1 > s2 = False
                            | otherwise = False
--- 2. 24h na 12h
+-- 2. apíšte funkciu, ktorá 24-hodinový čas prevedie na 12-hodinový.
 prevod_hodin (h,m,s) | h > 12 = (h-12,m,s," PM")
                      | h == 0 = (h+12,m,s," AM")
                      | h == 12 = (h,m,s," PM")
                      | otherwise = (h,m,s,"AM")
+
+---------------------------------------------------------------------------------------
 
 -- 1. Napíšte funkciu kvRovnica :: (Ord a, Floating a) => (a,a,a) -> [a], ktorá nájde riešenie kvadratickej rovnice ax2+bx+c=0 danej parametrami a,b,c.
 kvRovnica (a,b,c) | d < 0 = [] -- nema riesenie
