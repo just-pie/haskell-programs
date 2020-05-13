@@ -537,6 +537,14 @@ sito _ = []
 
 -----------------------------------------------------------------------------
 -------------------------      Ulohy na precvicenie      --------------------
+-----------------------------------------------------------------------------
+-- 1. Funkcia fakt :: Num a => a -> a vypočíta pre zadané číslo jeho faktoriál. 
+fakt x | x < 2 = 1
+       | otherwise = x * fakt(x-1)
+
+-- 2. Funkcia mocnina :: Num a => a -> a -> a vypočíta pre zadaný základ z a exponent e mocninu ze. 
+mocnina a n | n == 0 = 1
+            | otherwise = a ^ n 
 
 -- 3. Funkcia nsd :: (Ord a, Num a) => a -> a -> a, ktorá vráti najväčší spoločný deliteľ dvoch zadaných čísiel.
 -- nsd 34 18 = 2
@@ -552,13 +560,128 @@ myGCD a b
 sudelitelne a b | nsd a b <= 1 = False
                 | otherwise = True
 
+
+-- 5. Funkcia prvocislo :: Num a => a -> Bool, ktorá zistí, či zadané číslo je prvočíslo.
+celociselnedelitele n = [ x | x <- [1..n], n `mod`x ==0 ]
+prvocislo n | celociselnedelitele n == [1,n] = True
+            | otherwise = False
+
+--  6. Funkcia skor :: (a,b,c) -> (d,e,f) -> Bool, ktorá porovná dva časy a zistí, či prvý je skôr ako druhý. 
+skor (h,m,s) (h2,m2,s2) | h > h2 =True
+                        | h==h2 && m >= m2 && s>=s2 = True
+                        | otherwise = False
+                        
+-- 7. Funkcia cas12 :: (a,b,c) -> (a,b,c,[Char]), ktorá prevedie 24-hodinový čas na 12-hodinový.  
+cas12 (h,m,s)  | h > 12 = (h-12,m,s)
+               | otherwise = (h,m,s)
+
+--  8. Funkcia velV :: Floating a => (a,a) -> a na výpočet veľkosti rovinného vektora. 
+--absolutnah x | x < 0 = x * (-1)
+--             | otherwise = x
+velV(a1,a2)=sqrt(a1^2+a^2)
+
+--9. Funkcia vzdialenost :: Floating a => (a,a) -> (a,a) -> a na výpočet vzdialenosti dvoch bodov v rovine. 
+absolutnah x | x < 0 = x * (-1)
+             | otherwise = x
+vzdialenost a1 a2 b1 b2 = absolutnah ( sqrt( (b1-a1)^2 + (b2-a2)^2 ) )
+
+
+--10. Funkcia korene :: Floating a => (a,a,a) -> [a] na výpočet koreňov kvadratickej funkcie. 
+korene a b c = if d < 0  
+                  then error "0"
+               else (x,y) where
+                  x = e + sqrt d / (2 * a)
+                  y = e - sqrt d / (2 * a)
+                  d = b * b - 4 * a * c
+                  e = - b / (2 * a)
+
+--12. Funkcia usporiadany :: Ord a => [a] -> Bool, ktorá zistí, či je zadaný zoznam usporiadaný vzostupne
+usporiadany [] = True
+usporiadany [x] = True
+usporiadany (x:xs) | head (x:xs) < (x:xs)!!2 = True
+                   | otherwise = False
+
+--13. Funkcia delitele :: Int -> [Int], ktorá vráti zoznam vlastných deliteľov zadaného čísla. 
+delitele n = [x | x <- [1..n-1], n `mod` x ==0 ]
+
+--14. Funkcia pocet_zap :: [Int] -> Int, ktorá vráti počet záporných čísiel v danom zozname. 
+pocet_zap [x] = if x < 0 then 1 else 0
+pocet_zap (x:xs) = length [z | z <-(x:xs), z < 0]
+
+-- 15. Funkcia isSet :: Eq a => [a] -> Bool, ktorá zistí, či zadaný zoznam neobsahuje opakujúce sa prvky. 
+isSet []     = True
+isSet (x:xs) = x `notElem` xs && isSet xs
+
+-- 16. Funkcia listToSet :: Eq a => [a] -> [a], ktorá zadaný zoznam prevedie na zoznam s neopakujúcimi sa prvkami.
+listToSet :: Eq a => [a] -> [a]
+listToSet [] = []
+listToSet (x:xs) = x : listToSet (filter (/=x) xs)
+
+-- 17. Funkcia digitToInt :: Char -> Int, ktorá zadaný znak (číslicu) z intervalu ’0’..’9’, ’A’..’F’ prevedie na číslo 0..15, výsledkom pre iný znak bude chyba.
+digitToInt x | x == '0' = 0
+             | x == '1' = 1
+             | x == '2' = 2
+             | x == '3' = 3
+             | x == '4' = 4
+             | x == '5' = 5
+             | x == '6' = 6
+             | x == '7' = 7
+             | x == '8' = 8
+             | x == '9' = 9
+             | x == 'A' = 10
+             | x == 'B' = 11
+             | x == 'C' = 12
+             | x == 'D' = 13
+             | x == 'E' = 14
+             | x == 'F' = 15
+             | otherwise = error "chyba"
+
+--18. Funkcia binToDec :: [Char] -> Int, ktorá zadaný reťazec núl a jednotiek (binárne číslo) prevedie na desiatkové číslo.
+bin2dec = foldr (\c s -> s * 2 + c) 0 . reverse . map c2i
+    where c2i c = if c == '0' then 0 else 1
+
+-- 19. Funkcia hexToDec :: [Char] -> Int, ktorá zadaný reťazec (hexadecimálne číslo) prevedie na desiatkové číslo
+hexChar :: Char -> Integer
+hexChar ch
+    | ch == '0' = 0
+    | ch == '1' = 1
+    | ch == '2' = 2
+    | ch == '3' = 3
+    | ch == '4' = 4
+    | ch == '5' = 5
+    | ch == '6' = 6
+    | ch == '7' = 7
+    | ch == '8' = 8
+    | ch == '9' = 9
+    | ch == 'A' = 10
+    | ch == 'B' = 11
+    | ch == 'C' = 12
+    | ch == 'D' = 13
+    | ch == 'E' = 14
+    | ch == 'F' = 15
+    | otherwise = 0
+
+parseHex :: String -> Integer
+parseHex hxStr | length hxStr /= 0 = (hexChar(last(hxStr)))+(16*parseHex(init(hxStr)))
+               | otherwise = 0 
+
+-- 20. Funkcia decToBin :: Integral a => a -> [Char], ktorá zadané celé nezáporné číslo v desiatkovej sústave prevedie na binárne číslo (reťazec núl a jednotiek).  
+
+decToBin 0 = "0"
+decToBin n | n `mod` 2 == 1 = decToBin (n `div` 2) ++ "1"
+           | n `mod` 2 == 0 = decToBin (n `div` 2) ++ "0"
+
+--21. Funkcia copy :: [Char] -> Int -> Int -> [Char] má tri parametre: reťazec r, index i, číslo d, vráti časť reťazca r od indexu i dĺžky d. 
+
+--22. Funkcia delete :: [Char] -> Int -> Int -> [Char] má tri parametre: reťazec r, index i, číslo d, vymaže z reťazca r časť od indexu i dĺžky d. 
+
+--23. Funkcia group :: [a] -> [[a]] , ktorá v zadanom zozname zoskupí do podzoznamov po sebe nasledujúce rovnaké prvky. 
 group :: (Eq a) => [a] ->  [[a]]
 group [] = []
 group (x:xs) = first : group second
   where y = span (== x) $ x:xs
         first = fst $ y
         second = snd $ y
-
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
