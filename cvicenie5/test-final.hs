@@ -38,7 +38,7 @@ skor (h1,m1,s1) (h2,m2,s2) | h1 < h2 = True
                            | s1 < s2 = True
                            | s1 > s2 = False
                            | otherwise = False
--- 2. apíšte funkciu, ktorá 24-hodinový čas prevedie na 12-hodinový.
+-- 2. Napíšte funkciu, ktorá 24-hodinový čas prevedie na 12-hodinový.
 prevod_hodin (h,m,s) | h > 12 = (h-12,m,s," PM")
                      | h == 0 = (h+12,m,s," AM")
                      | h == 12 = (h,m,s," PM")
@@ -408,3 +408,20 @@ bools :: Int -> [[Bool]]
 bools 0 = [[]]
 bools n = map (False:) acc ++ map (True:) acc
           where acc = bools (n-1)          
+
+-- Vypise pocet parnych cisel, vypise pocet neparnych cisel
+parne :: [Int] -> Int
+parne xs = length [ x | x <- xs, even x ]
+
+neparne :: [Int] -> Int
+neparne xs = length [ x | x <- xs, odd x ]
+
+-- Vypise list parnych cisel, vypise list neparnych cisel
+vypis_parne :: [Int] -> [Int]
+vypis_parne xs = [ x | x <- xs, odd x ]
+
+vypis_neparne :: [Int] -> [Int]
+vypis_neparne xs = [ x | x <- xs, odd x ]
+
+-- Eulerova funkcia - pocet nesudelitelnych cisel
+eulerFunkcia n = length [x | x <- [1..n], gcd n x == 1]
