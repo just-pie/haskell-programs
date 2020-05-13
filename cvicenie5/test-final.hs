@@ -122,6 +122,19 @@ minSort [x] = [x]
 minSort xs = m : (minSort (bezPrvku  m xs))
   where m = mini xs
 
+
+-----------------------------------------------------------------------------
+-- PRIKLADY Z PREZENCTACII
+-- Pascalov trojuholnik
+pascal 0 = [1]
+pascal n = zipWith (+) ([0] ++ pascal (n-1)) (pascal (n-1) ++ [0])
+
+-- Eratostenovo sito
+sito (p:xs) = p:sito [n | n <- xs, mod n p /= 0]
+sito _ = []
+
+
+-----------------------------------------------------------------------------
 -- spojenie dvoch zoznamov
 spoj :: [a]->[a]->[a]
 spoj xs ys =concat[xs,ys]
@@ -135,3 +148,10 @@ reverse (x:xs) = rev xs ++[x]
 vymaz_duplikat :: Eq a => [a] -> [a]
 vymaz_duplikat []     = []
 vymaz_duplikat (x:xs) = x : filter (/= x) (vymaz_duplikat xs)
+
+-- vypise permutacie False a True v zozname
+-- Priklad: print(bools 2)  -> [[False,False],[False,True],[True,False],[True,True]]
+bools :: Int -> [[Bool]]
+bools 0 = [[]]
+bools n = map (False:) acc ++ map (True:) acc
+          where acc = bools (n-1)          
