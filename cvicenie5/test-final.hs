@@ -11,11 +11,55 @@ prvok :: a -> [a] -> Bool elem
 sucet :: Num a => [a] -> a sum
 obrat :: [a] -> [a] reverse
 maxi :: Ord a => [a] -> a maximum
+
+el = [] prázdny zoznam
+l = [1..] nekonečný zoznam
+
+Konštruktory (:), [], ++
+1:[] = [1]
+1:2:[] = [1,2]
+1:[2,3] = [1,2,3]
+[1,2] ++ [3] = [1,2,3]
+
+Selektory
+head [1,2,3] = 1 init [1,2,3] = [1,2]
+tail [1,2,3] = [2,3] last [1,2,3] = 3
+[1,2,3]!!0 = 1 [1,2,3]!!1 = 2 [1,2,3]!!2 = 3
+take 2 [1,2,3,4,5] = [1,2]
+drop 2 [1,2,3,4,5] = [3,4,5]
+
+_ je Wildcard - unifikuje sa s ľubovoľnou hodnotou daného typu
+
+[] – prázdny zoznam
+(x:xs) – neprázdny zoznam
+(x:y:ys) – zoznam dĺžky aspoň 2
+
+Aliasing
+z@(x:xs) – vzor pre celok (z) aj jeho časti (x:xs)
+
+Zip transformuje dva zoznamy na zoznam dvojíc
+zip :: [a] -> [b] -> (a,b)
+zip [1,2,3] [4,5,6] => [(1,4),(2,5),(3,6)]
+
+Unzip transformuje zoznam dvojíc do dvojice zoznamov
+(výsledok funkcie nemôžu byť dva zoznamy)
+unzip :: [(a,b)] -> ([a],[b])
+unzip [(1,4),(2,5),(3,6)] => ([1,2,3],[4,5,6])
 --}
 
 --------------------------------------------------------------------------
 --------------------------     cvicenie1.hs    ---------------------------
 --------------------------------------------------------------------------
+-- wildcard vo funkcii, ktorá vráti prvý prvok zoznamu
+head (x:_) = x
+-- aliasing vo funkcii, ktorá zdvojí prvý prvok na začiatku zoznamu
+dva_prve z@(x:xs) = x:z
+-- List comprehension - gnerovanie zoznamov
+xs = concat [[1,2],[3],[4,5,6]] -- [1,2,3,4,5,6]
+
+-- Guearded equations
+postupnost d h krok = [d, (d+krok)..h]
+
 absolutna x = if x < 0 then x*(-1) else x
 
 absolutnaGE x | x < 0 = x*(-1)
@@ -42,6 +86,10 @@ urocenaSuma suma urok roky | roky == 0 = suma
                            | urok == 0 = suma
                            | suma == 0 = 0
                            | otherwise = urocenaSuma (suma+((suma/100)*urok)) urok (roky-1)
+
+-- Zoznam susedných dvojíc v zozname
+dvojice xs = zip (init xs) (tail xs)
+dvojice [1,2,3,4] = [(1,2),(2,3),(3,4)] 
 
 ---------------------------------------------------------------------------------------
 ------------    distancne_zadanie.hs a distancne_zadanie_precvicovanie.hs    ----------
@@ -82,7 +130,7 @@ maxi [x] = x
 maxi (x:y:ys) | x <= y = maxi(y:ys)
                  | otherwise = maxi (x:ys)
 
--- 3. Funkcia prvok :: Eq a => a -> [a] -> Bool zistí, či zadaná hodnota je prvkom zadaného zoznamu.
+-- 3. Funkcia prvok :: Eq a => a -> [a] -> Bool zistí, či zadaná hodnota je prvkom zadaného zoznamu. Elem, elem
 prvok :: Eq a => a -> [a] -> Bool
 prvok _ [] = False
 prvok x (y:ys) | x == y = True
@@ -282,6 +330,59 @@ unpackListR xs = foldr (\x acc ->  (unpackTuple x) ++ acc) [] xs
                                          | otherwise  = unpackTuple (p-1, c) ++ [c]
 
 
+-- DALSIE FUNKCIE VYSSIEHO RADU
+-- Zdvojnasobi cisla v zozname
+doubleList xs = map (\x -> 2 * x) xs
+-- print(doubleList [1,2,3]) -- [2,4,6]
+
+-- funkcia na spojenie dvoch zoznamov pomocou foldr
+xs ++ ys = foldr (:) ys xs
+-- [1,2,3] ++ [4,5]  -- [1,2,3,4,5]
+
+-- Funkcia OR pomocou foldr
+or xs = foldr (||) False xs
+-- print(or [False, False, True])  -- TRUE
+
+-- Zistenie dlzky zoznamu pomocou foldr
+length xs = foldr (\x y -> 1 + y) 0 xs
+
+-- Hornerova schema
+horner xs = foldl (\x y -> x*10 + y) 0 xs
+
+-- FILTROVANIE
+-- definovanie pomocou list comprehension
+filter p xs = [x | x <- xs, p x]
+--definovanie pomocou pattern matching a rekurzie
+filter _ [] = []
+filter p (x:xs) | p x = x : filter p xs
+                | otherwise = filter p xs
+
+-- Vrati prvky zo zoznamu, pre ktore plati podmienka
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile _ [] = []
+takeWhile p (x:xs) | p x = x : (takeWhile p xs)
+                   | otherwise = []
+                   
+-- Odstrani prvky zo zoznamu, pre ktore plati podmienka
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile _ [] = []
+dropWhile p z@(x:xs) | p x = dropWhile p xs
+                     | otherwise = z
+
+-- Existuje prvok v zozname, pre ktorá platí podmienka?
+any :: (a -> Bool) -> [a] -> Bool
+any _ [] = False
+any p (x:xs) | p x = True
+             | otherwise = any p xs
+-- print(any (== 5) [1,2,3,4])  -- False
+
+--Platí podmienka pre všetky prvky v zozname?
+all :: (a -> Bool) -> [a] -> Bool
+all _ [] = False
+all p (x:xs) | p x = all p xs
+             | otherwise = False
+-- print(all (< 5) [1,2,3,4])  -- True
+
 -----------------------------------------------------------------------------------------------
 -----------------------------    vyhodnocovanie_vyrazov.hs    ---------------------------------
 -----------------------------------------------------------------------------------------------
@@ -386,8 +487,40 @@ fibTR x acc1 acc2 = fibTR (x-1) acc2 (acc1+acc2)
 fibTR2 x = fibTR x 0 1
 
 
+-- DALSIE ZADANIA Z PREZENTACIE
+fib a b = a : (fib b (a+b))
 
+-- Funkcia iterate :: (a -> a) -> a -> [a] vráti nekonečný zoznam opakovaných aplikácií funkcie f na parameter x [x, f x, f (f x), ...]
+iterate f x = x : (iterate f (f x))
 
+-- UROKY
+-- Hodnota vkladu 1000€ úročeného raz ročne 3,5% po dobu 3 roky:
+iterate (*1.035) 1000 !! 3
+
+-- Zostatok dlžnej sumy z pôžičky 1000€ pri mesačnej splátke 20€ a ročnom úroku 10% po 3 rokoch:
+iterate (\x->(x-240)*1.10) 1000 !! 3
+
+-- Funkcia zip :: [a] -> [b] -> [(a,b)] vezme dva zoznamy a vráti zoznam dvojíc korešpondujúcich prvkov. Ak je niektorý zo vstupných zoznamov kratší, zvyšok druhého zoznamu sa ignoruje.
+zip (a:as) (b:bs) = (a,b):(zip as bs)
+zip _ _ = []
+
+-- Funkcia zipWith :: (a -> b -> c) -> [a] -> [b] -> [c] vezme binárnu funkciu a dva zoznamy a vráti zoznam výsledkov binárnej funkcie na príslušných prvkoch zoznamov.
+zipWith f (a:as) (b:bs) = (f a b) : (zipWith f as bs)
+zipWith _ _ _ = []
+
+-- Fibonacci s funkciou zipWith
+fibs = 1 : 1 : (zipWith (+) fibs (tail fibs))
+-- prvých 10:
+take 10 fibs
+-- desiate:
+fibs !! 10
+-- najmenšie štvorciferné:
+head (dropWhile (< 1000) fibs))
+-- najväčšie štvorciferné:
+last (takeWhile (< 10000) fibs)
+
+-- Pascalov trojuholnik
+pascal = iterate riadok [1] where riadok r = zipWith (+) (r++[0]) ([0]++r)  -- POZOR - bude sa to robit donekonecna!
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
@@ -408,6 +541,11 @@ sito _ = []
 -- 3. Funkcia nsd :: (Ord a, Num a) => a -> a -> a, ktorá vráti najväčší spoločný deliteľ dvoch zadaných čísiel.
 -- nsd 34 18 = 2
 nsd a b = gcd a b   
+-- euklidovym algoritmom
+myGCD :: Integer -> Integer -> Integer
+myGCD a b
+      | b == 0     = abs a
+      | otherwise  = myGCD b (a `mod` b)
 
 -- 4. Funkcia sudelitelne :: (Ord a, Num a) => a -> a -> Bool, ktorá zistí, či zadané dve čísla sú súdeliteľné, t.j. či majú spoločného deliteľa rôzneho od 1.
 -- sudelitelne 34 18 = True
@@ -500,3 +638,32 @@ prvy (x : xs) = x
 posledny :: [Integer] -> Integer
 posledny (x : []) = x
 posledny (x : xs) = lastElem xs
+
+-- Vlozi cislo do zoznamu an urcitu poziciu
+insertAt :: a -> [a] -> Int -> [a]
+insertAt x ys     1 = x:ys
+insertAt x (y:ys) n = y:insertAt x ys (n-1)
+-- alebo
+insertAtX x xs n = take (n-1) xs ++ [x] ++ drop (n-1) xs
+
+-- Sucet prvkov v zozname
+sucet xs = sum xs 
+
+-- Duplikuje kazdy prvok v zozname dvakrat
+dupli xs = concat [[x,x] | x <- xs]
+
+-- Duplikuje kazdy prvok v zozname n-krat
+repli :: [a] -> Int -> [a]
+repli xs n = xs >>= replicate n
+
+-- Vymaze kazdy n-ty prvok zo zoznamu
+dropEvery :: [a] -> Int -> [a]
+dropEvery xs n = [ i | (i,c) <- ( zip xs [1,2..]), (mod c n) /= 0]
+
+-- Rozdeli zoznam na 2 zoznamy od urciteho prvku
+split xs n = (take n xs, drop n xs)
+
+-- Faktorial
+faktorial n = if n == 0 then 1 else n * faktorial (n-1)
+
+
