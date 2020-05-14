@@ -672,6 +672,8 @@ decToBin n | n `mod` 2 == 1 = decToBin (n `div` 2) ++ "1"
            | n `mod` 2 == 0 = decToBin (n `div` 2) ++ "0"
 
 --21. Funkcia copy :: [Char] -> Int -> Int -> [Char] má tri parametre: reťazec r, index i, číslo d, vráti časť reťazca r od indexu i dĺžky d. 
+copy :: [Char] -> Int -> Int -> [Char]
+copy str i n = take n (drop (i-1) str)
 
 --22. Funkcia delete :: [Char] -> Int -> Int -> [Char] má tri parametre: reťazec r, index i, číslo d, vymaže z reťazca r časť od indexu i dĺžky d. 
 
@@ -789,4 +791,6 @@ split xs n = (take n xs, drop n xs)
 -- Faktorial
 faktorial n = if n == 0 then 1 else n * faktorial (n-1)
 
+-- REPLACE char in string
+replace a b = concat (map (\x -> if x == a then b else [x]) "funkcionalne programovanie")
 
