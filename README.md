@@ -11,4 +11,4 @@ A little course of Haskell programs.
 - 📁 [`cvicenie2`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie2) - [*distancne_zadanie.hs*](https://github.com/pajka-js/haskell-practice/blob/master/cvicenie2/distancne_zadanie.hs) and [*distancne_zadanie_precvicovanie.hs*](https://github.com/pajka-js/haskell-practice/blob/master/cvicenie2/distancne_zadanie_precvicovanie.hs)
 - 📁 [`cvicenie3`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie3) - [*funkcie_vyssieho_radu.hs*](https://github.com/pajka-js/haskell-practice/blob/master/cvicenie3/funkcie_vyssieho_radu.hs) -> ***Higher order functions***
 - 📁 [`cvicenie4`](https://github.com/pajka-js/haskell-programs/tree/master/cvicenie4) - [*vyhodnocovanie_vyrazov.hs*](https://github.com/pajka-js/haskell-practice/blob/master/cvicenie4/vyhodnocovanie_vyrazov.hs)
-- 📁 `cvicenie5` - *Soon...*
+- 📁 [`cvicenie5`] (https://github.com/pajka-js/haskell-programs/tree/master/cvicenie5) - [*test-final.hs*](https://github.com/pajka-js/haskell-practice/blob/master/cvicenie4/test-final.hs)
